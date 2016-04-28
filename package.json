@@ -22,6 +22,9 @@
     "node": ">= 0.10.x"
   },
   "license": "Apache-2.0",
+  "dependencies": {
+    "featurebook-gherkin": "git+https://github.com/SOFTWARE-CLINIC/featurebook-gherkin.git"
+    },
   "devDependencies": {
     "chai": "3.5.0",
     "mocha": "2.4.5"
