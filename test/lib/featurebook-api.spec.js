@@ -7,8 +7,10 @@ var featurebook = require('./../../lib/featurebook-api');
 
 describe('featurebook-api', function () {
 
-  it('should have version property', function () {
-    expect(featurebook.version).to.equal(require('./../../package.json').version);
+  describe('#getVersion', function () {
+    it('should return version of this API', function () {
+      expect(featurebook.getVersion()).to.equal(require('./../../package.json').version);
+    });
   });
 
 });
