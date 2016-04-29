@@ -7,13 +7,46 @@ var featurebook = require('./../../lib/featurebook-api');
 
 describe('featurebook-api', function () {
 
-  describe('#getVersion()', function () {
+  describe('#getVersion', function () {
     it('should return version of this API', function () {
       expect(featurebook.getVersion()).to.equal(require('./../../package.json').version);
     });
   });
 
-  describe('#readFeatureSync()', function () {
+  describe('#readMetadataSync', function () {
+
+    it('should return null given a specification directory without the metadata descriptor', function () {
+      var metadata = featurebook.readMetadataSync('test/resources/features');
+      expect(metadata).to.be.null;
+    });
+
+    it('should return the metadata object given a specification directory with the metadata descriptor', function () {
+      var metadata = featurebook.readMetadataSync('test/resources/specs/tiny');
+      expect(metadata).to.deep.equal({title: 'Tiny Specification', version: 'v1.0.3'});
+    });
+
+  });
+
+  describe('#readMetadata', function () {
+
+    it('should propagate null given a specification directory without the metadata descriptor', function (done) {
+      featurebook.readMetadata('test/resources/features', function (err, metadata) {
+        expect(err).to.be.null;
+        expect(metadata).to.be.null;
+        done();
+      });
+    });
+
+    it('should propagate the metadata object given a specification directory with the metadata descriptor', function (done) {
+      featurebook.readMetadata('test/resources/specs/tiny', function (err, metadata) {
+        expect(metadata).to.deep.equal({title: 'Tiny Specification', version: 'v1.0.3'});
+        done();
+      });
+    });
+
+  });
+
+  describe('#readFeatureSync', function () {
 
     it('should throw an error given a non-existent feature file', function () {
       expect(function () {
@@ -27,7 +60,7 @@ describe('featurebook-api', function () {
       }).to.throw();
     });
 
-    it('should return a feature object given a valid feature file', function () {
+    it('should return the feature object given a valid feature file', function () {
       var feature = featurebook.readFeatureSync('test/resources/features/simple.feature');
       expectSampleFeature(feature);
     });
@@ -50,7 +83,7 @@ describe('featurebook-api', function () {
       });
     });
 
-    it('should propagate a feature object given a valid feature file', function (done) {
+    it('should propagate the feature object given a valid feature file', function (done) {
       featurebook.readFeature('test/resources/features/simple.feature', function (err, feature) {
         expect(err).to.not.exist;
         expectSampleFeature(feature);
