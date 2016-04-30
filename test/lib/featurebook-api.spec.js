@@ -9,10 +9,36 @@ var featurebook = require('./../../lib/featurebook-api');
 
 describe('featurebook-api', function () {
 
+  it('should export node type constants', function () {
+    expect(featurebook.NODE_FILE).to.equal('file');
+    expect(featurebook.NODE_DIRECTORY).to.equal('directory');
+  });
+
   describe('#getVersion', function () {
     it('should return version of this API', function () {
       expect(featurebook.getVersion()).to.equal(require('./../../package.json').version);
     });
+  });
+
+  describe('#readSpecTreeSync', function () {
+
+    it('should return specification tree object', function () {
+      var specTree = featurebook.readSpecTreeSync('test/resources/specs/tiny');
+      expectTinySpecTree(specTree);
+    });
+
+  });
+
+  describe('#readSpecTree', function () {
+
+    it('should propagate specification tree object', function (done) {
+      featurebook.readSpecTree('test/resources/specs/tiny', function (err, specTree) {
+        expect(err).to.be.null;
+        expectTinySpecTree(specTree);
+        done();
+      });
+    });
+
   });
 
   describe('#readMetadataSync', function () {
@@ -149,6 +175,65 @@ describe('featurebook-api', function () {
     expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[2].type', 'Step');
     expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[2].keyword', 'Then ');
     expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[2].text', 'step 3');
+  }
+
+  function expectTinySpecTree(specTree) {
+    expect(specTree).to.deep.equal({
+      "path": ".",
+      "name": "tiny",
+      "displayName": "Tiny",
+      "type": "directory",
+      "children": [
+        {
+          "path": "section-a",
+          "name": "section-a",
+          "displayName": "Section-a",
+          "type": "directory",
+          "children": [
+            {
+              "path": "section-a/file-a.feature",
+              "name": "file-a.feature",
+              "displayName": "File-a",
+              "type": "file"
+            },
+            {
+              "path": "section-a/file-b.feature",
+              "name": "file-b.feature",
+              "displayName": "File-b",
+              "type": "file"
+            },
+            {
+              "path": "section-a/section-b",
+              "name": "section-b",
+              "displayName": "Section-b",
+              "type": "directory",
+              "children": [
+                {
+                  "path": "section-a/section-b/file-c.feature",
+                  "name": "file-c.feature",
+                  "displayName": "File-c",
+                  "type": "file"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "section-c",
+          "name": "section-c",
+          "displayName": "Section-c",
+          "type": "directory",
+          "children": [
+            {
+              "path": "section-c/file-d.feature",
+              "name": "file-d.feature",
+              "displayName": "File-d",
+              "type": "file"
+            }
+          ]
+        }
+      ]
+    });
   }
 
 });
