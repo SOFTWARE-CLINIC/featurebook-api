@@ -1,5 +1,7 @@
 'use strict';
 
+var EOL = require('os').EOL;
+
 var chai = require('chai');
 var expect = chai.expect;
 
@@ -87,6 +89,40 @@ describe('featurebook-api', function () {
       featurebook.readFeature('test/resources/features/simple.feature', function (err, feature) {
         expect(err).to.not.exist;
         expectSampleFeature(feature);
+        done();
+      });
+    });
+
+  });
+
+  describe('readSummarySync', function () {
+
+    it('should return null given a directory without the summary file', function () {
+      var summary = featurebook.readSummarySync('__nonexistentsummaryfile_');
+      expect(summary).to.be.null;
+    });
+
+    it('shoud return contents given a directory with the summary file', function () {
+      var summary = featurebook.readSummarySync('test/resources/specs/tiny');
+      expect(summary).to.equal('# Tiny Specification' + EOL);
+    });
+
+  });
+
+  describe('readSummary', function () {
+
+    it('should propagate null given a directory without the summary file', function (done) {
+      featurebook.readSummary('__nonexistentsummaryfile_', function (err, summary) {
+        expect(err).to.be.null;
+        expect(summary).to.be.null;
+        done();
+      });
+    });
+
+    it('should propagate contents given a directory with the summary file', function (done) {
+      featurebook.readSummary('test/resources/specs/tiny', function (err, summary) {
+        expect(err).to.be.null;
+        expect(summary).to.equal('# Tiny Specification' + EOL);
         done();
       });
     });
