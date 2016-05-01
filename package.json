@@ -1,6 +1,6 @@
 {
   "name": "featurebook-api",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.1",
   "description": "FeatureBook's API",
   "main": "index.js",
   "files": [
@@ -23,8 +23,8 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "featurebook-gherkin": "git+https://github.com/SOFTWARE-CLINIC/featurebook-gherkin.git"
-    },
+    "featurebook-gherkin": "1.0.0-alpha.1"
+  },
   "devDependencies": {
     "chai": "3.5.0",
     "mocha": "2.4.5"
