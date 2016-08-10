@@ -23,7 +23,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "featurebook-gherkin": "1.0.0-alpha.1"
+    "featurebook-gherkin": "git+https://github.com/SOFTWARE-CLINIC/featurebook-gherkin.git"
   },
   "devDependencies": {
     "chai": "3.5.0",
