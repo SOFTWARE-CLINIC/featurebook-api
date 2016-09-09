@@ -8,3 +8,7 @@ node_js:
   - "0.12"
   - "0.11"
   - "0.10"
+
+after_script:
+  - npm run coverage
+  - npm run coveragetocodeclimate
