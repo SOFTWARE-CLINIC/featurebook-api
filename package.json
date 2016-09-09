@@ -8,7 +8,9 @@
     "index.js"
   ],
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha test/lib/**/*.spec.js --recursive",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec test/lib/**/*.spec.js",
+    "coveragetocodeclimate": "codeclimate-test-reporter < ./coverage/lcov.info"
   },
   "author": {
     "name": "Daniel Pacak",
@@ -27,6 +29,8 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "mocha": "2.4.5"
+    "codeclimate-test-reporter": "0.3.3",
+    "istanbul": "0.4.5",
+    "mocha": "3.0.2"
   }
 }
