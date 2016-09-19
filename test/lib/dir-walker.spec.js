@@ -2,6 +2,7 @@
 
 var walker = require('../../lib/dir-walker');
 var path = require('path');
+var minimatch = require('minimatch');
 
 var chai = require('chai');
 var expect = chai.expect;
@@ -9,20 +10,20 @@ var expect = chai.expect;
 describe('dir-walker', function () {
 
   var TEST_DIR = 'test/resources/dir-walker';
-  var ALL_FILES_FILTER = function () {
-    return true;
+  var ALL_FILES_EXCEPT_C_SHARP_FILTER = function (dir, file) {
+    return !minimatch(path.join(dir, file), '**/*.cs');
   };
 
   describe('#findTreeSync', function () {
     it('should return files tree object', function () {
-      var tree = walker.findTreeSync(TEST_DIR, ALL_FILES_FILTER);
+      var tree = walker.findTreeSync(TEST_DIR, ALL_FILES_EXCEPT_C_SHARP_FILTER);
       expectTree(tree);
     });
   });
 
   describe('#findTree', function () {
     it('should propagate files tree object', function (done) {
-      walker.findTree(TEST_DIR, ALL_FILES_FILTER, function (err, tree) {
+      walker.findTree(TEST_DIR, ALL_FILES_EXCEPT_C_SHARP_FILTER, function (err, tree) {
         expect(err).to.be.null;
         expectTree(tree);
         done();
