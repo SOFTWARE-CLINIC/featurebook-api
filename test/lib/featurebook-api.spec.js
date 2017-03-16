@@ -9,9 +9,13 @@ var featurebook = require('./../../lib/featurebook-api');
 
 describe('featurebook-api', function () {
 
-  it('should export node type constants', function () {
-    expect(featurebook.NODE_FILE).to.equal('file');
-    expect(featurebook.NODE_DIRECTORY).to.equal('directory');
+  describe('#featurebook', function () {
+
+    it('should export node type constants', function () {
+      expect(featurebook.NODE_FILE).to.equal('file');
+      expect(featurebook.NODE_DIRECTORY).to.equal('directory');
+    });
+
   });
 
   describe('#getVersion', function () {
@@ -121,7 +125,7 @@ describe('featurebook-api', function () {
 
   });
 
-  describe('readSummarySync', function () {
+  describe('#readSummarySync', function () {
 
     it('should return null given a directory without the summary file', function () {
       var summary = featurebook.readSummarySync('__nonexistentsummaryfile_');
@@ -135,7 +139,7 @@ describe('featurebook-api', function () {
 
   });
 
-  describe('readSummary', function () {
+  describe('#readSummary', function () {
 
     it('should propagate null given a directory without the summary file', function (done) {
       featurebook.readSummary('__nonexistentsummaryfile_', function (err, summary) {
@@ -211,7 +215,7 @@ describe('featurebook-api', function () {
                 {
                   "path": "section-a/section-b/file-c.feature",
                   "name": "file-c.feature",
-                  "displayName": "File-c",
+                  "displayName": "Feature C Overwrite",
                   "type": "file"
                 }
               ]
@@ -227,7 +231,7 @@ describe('featurebook-api', function () {
             {
               "path": "section-c/file-d.feature",
               "name": "file-d.feature",
-              "displayName": "File-d",
+              "displayName": "Feature D Overwrite",
               "type": "file"
             }
           ]
