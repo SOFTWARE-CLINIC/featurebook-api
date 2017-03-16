@@ -235,6 +235,12 @@ describe('featurebook-api', function () {
               "type": "file"
             }
           ]
+        },
+        {
+          "displayName": "Unparsable",
+          "name": "unparsable.feature",
+          "path": "unparsable.feature",
+          "type": "file"
         }
       ]
     });
