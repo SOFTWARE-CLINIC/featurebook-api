@@ -35,31 +35,26 @@ describe('dir-walker', function () {
     expect(tree).to.deep.equal({
       "path": ".",
       "name": "dir-walker",
-      "displayName": "Dir-walker",
       "type": "directory",
       "children": [
         {
           "path": "dir-a",
           "name": "dir-a",
-          "displayName": "Dir-a",
           "type": "directory",
           "children": [
             {
               "path": "dir-a/dir-b",
               "name": "dir-b",
-              "displayName": "Dir-b",
               "type": "directory",
               "children": [
                 {
                   "path": "dir-a/dir-b/dir-c",
                   "name": "dir-c",
-                  "displayName": "Dir-c",
                   "type": "directory",
                   "children": [
                     {
                       "path": "dir-a/dir-b/dir-c/file-e.feature",
                       "name": "file-e.feature",
-                      "displayName": "File-e",
                       "type": "file"
                     }
                   ]
@@ -67,13 +62,11 @@ describe('dir-walker', function () {
                 {
                   "path": "dir-a/dir-b/file-c.feature",
                   "name": "file-c.feature",
-                  "displayName": "File-c",
                   "type": "file"
                 },
                 {
                   "path": "dir-a/dir-b/file-d.txt",
                   "name": "file-d.txt",
-                  "displayName": "File-d.txt",
                   "type": "file"
                 }
               ]
@@ -81,13 +74,11 @@ describe('dir-walker', function () {
             {
               "path": "dir-a/file-a.feature",
               "name": "file-a.feature",
-              "displayName": "File-a",
               "type": "file"
             },
             {
               "path": "dir-a/file-b.txt",
               "name": "file-b.txt",
-              "displayName": "File-b.txt",
               "type": "file"
             }
           ]
