@@ -93,7 +93,7 @@ describe('featurebook-api', function () {
     });
 
     it('should return the feature object given a valid feature file', function () {
-      var feature = featurebook.readFeatureSync('test/resources/features/simple.feature');
+      var feature = featurebook.readFeatureSync('test/resources/features/simple.feature').feature;
       expectSampleFeature(feature);
     });
 
@@ -116,9 +116,9 @@ describe('featurebook-api', function () {
     });
 
     it('should propagate the feature object given a valid feature file', function (done) {
-      featurebook.readFeature('test/resources/features/simple.feature', function (err, feature) {
+      featurebook.readFeature('test/resources/features/simple.feature', function (err, document) {
         expect(err).to.not.exist;
-        expectSampleFeature(feature);
+        expectSampleFeature(document.feature);
         done();
       });
     });
@@ -164,21 +164,21 @@ describe('featurebook-api', function () {
     expect(feature.name).to.equal('Simple feature');
     expect(feature.keyword).to.equal('Feature');
 
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].type', 'Scenario');
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].name', 'Simple scenario');
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].keyword', 'Scenario');
+    expect(feature.children).to.have.deep.property('[0].type', 'Scenario');
+    expect(feature.children).to.have.deep.property('[0].name', 'Simple scenario');
+    expect(feature.children).to.have.deep.property('[0].keyword', 'Scenario');
 
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[0].type', 'Step');
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[0].keyword', 'Given ');
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[0].text', 'step 1');
+    expect(feature.children).to.have.deep.property('[0].steps[0].type', 'Step');
+    expect(feature.children).to.have.deep.property('[0].steps[0].keyword', 'Given ');
+    expect(feature.children).to.have.deep.property('[0].steps[0].text', 'step 1');
 
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[1].type', 'Step');
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[1].keyword', 'When ');
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[1].text', 'step 2');
+    expect(feature.children).to.have.deep.property('[0].steps[1].type', 'Step');
+    expect(feature.children).to.have.deep.property('[0].steps[1].keyword', 'When ');
+    expect(feature.children).to.have.deep.property('[0].steps[1].text', 'step 2');
 
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[2].type', 'Step');
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[2].keyword', 'Then ');
-    expect(feature.scenarioDefinitions).to.have.deep.property('[0].steps[2].text', 'step 3');
+    expect(feature.children).to.have.deep.property('[0].steps[2].type', 'Step');
+    expect(feature.children).to.have.deep.property('[0].steps[2].keyword', 'Then ');
+    expect(feature.children).to.have.deep.property('[0].steps[2].text', 'step 3');
   }
 
   function expectTinySpecTree(specTree) {
