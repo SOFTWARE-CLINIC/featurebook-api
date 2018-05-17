@@ -164,21 +164,21 @@ describe('featurebook-api', function () {
     expect(feature.name).to.equal('Simple feature');
     expect(feature.keyword).to.equal('Feature');
 
-    expect(feature.children).to.have.deep.property('[0].type', 'Scenario');
-    expect(feature.children).to.have.deep.property('[0].name', 'Simple scenario');
-    expect(feature.children).to.have.deep.property('[0].keyword', 'Scenario');
+    expect(feature.children).to.have.nested.property('[0].type', 'Scenario');
+    expect(feature.children).to.have.nested.property('[0].name', 'Simple scenario');
+    expect(feature.children).to.have.nested.property('[0].keyword', 'Scenario');
 
-    expect(feature.children).to.have.deep.property('[0].steps[0].type', 'Step');
-    expect(feature.children).to.have.deep.property('[0].steps[0].keyword', 'Given ');
-    expect(feature.children).to.have.deep.property('[0].steps[0].text', 'step 1');
+    expect(feature.children).to.have.nested.property('[0].steps[0].type', 'Step');
+    expect(feature.children).to.have.nested.property('[0].steps[0].keyword', 'Given ');
+    expect(feature.children).to.have.nested.property('[0].steps[0].text', 'step 1');
 
-    expect(feature.children).to.have.deep.property('[0].steps[1].type', 'Step');
-    expect(feature.children).to.have.deep.property('[0].steps[1].keyword', 'When ');
-    expect(feature.children).to.have.deep.property('[0].steps[1].text', 'step 2');
+    expect(feature.children).to.have.nested.property('[0].steps[1].type', 'Step');
+    expect(feature.children).to.have.nested.property('[0].steps[1].keyword', 'When ');
+    expect(feature.children).to.have.nested.property('[0].steps[1].text', 'step 2');
 
-    expect(feature.children).to.have.deep.property('[0].steps[2].type', 'Step');
-    expect(feature.children).to.have.deep.property('[0].steps[2].keyword', 'Then ');
-    expect(feature.children).to.have.deep.property('[0].steps[2].text', 'step 3');
+    expect(feature.children).to.have.nested.property('[0].steps[2].type', 'Step');
+    expect(feature.children).to.have.nested.property('[0].steps[2].keyword', 'Then ');
+    expect(feature.children).to.have.nested.property('[0].steps[2].text', 'step 3');
   }
 
   function expectTinySpecTree(specTree) {
